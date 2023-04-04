@@ -1,21 +1,25 @@
-<h1>{{titulo}}</h1>
-<table class="table table-hover table-striped">
-    <thead>
-        <tr>
-            <th>id</th>
-            <th>nombre</th>
-            <th>apellido</th>
-            <th>email</th>
-            <th>creado en</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let alumno of alumnos">
-            <td>{{alumno.id}}</td>
-            <td>{{alumno.nombre}}</td>
-            <td>{{alumno.apellido}}</td>
-            <td>{{alumno.email}}</td>
-            <td>{{alumno.createAt}}</td>
-        </tr>
-    </tbody>
-</table>
+<div class="card text-bg-light mb-3">
+    <div class="card-header">{{titulo}}</div>
+    <div class="card-body">
+        <table class="table table-hover table-striped">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>nombre</th>
+                    <th>apellido</th>
+                    <th>email</th>
+                    <th>creado en</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let alumno of alumnos">
+                    <td>{{alumno.id}}</td>
+                    <td>{{alumno.nombre}}</td>
+                    <td>{{alumno.apellido}}</td>
+                    <td>{{alumno.email}}</td>
+                    <td>{{alumno.createAt | date: 'yyyy/MM/dd'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
