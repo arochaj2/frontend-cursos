@@ -11,6 +11,7 @@
                     <th>email</th>
                     <th>creado en</th>
                     <th>editar</th>
+                    <th>eliminar</th>
                 </tr>
             </thead>
             <tbody>
@@ -23,6 +24,9 @@
                     <td><button class="btn btn-secondary btn-sm" 
                         [routerLink]="['/alumnos/form',alumno.id]">
                         editar</button></td>
+                    <td><button class="btn btn-danger btn-sm" 
+                        (click)="eliminar(alumno)">
+                        eliminar</button></td>
                 </tr>
             </tbody>
         </table>
