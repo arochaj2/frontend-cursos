@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumno.service';
 
@@ -18,9 +18,16 @@ export class AlumnosFormComponent implements OnInit {
 
 
   constructor(private service:AlumnoService, 
-              private router: Router) { }
+              private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.route.paramMap.subscribe(params=> {
+      const id: number = +params.get('id');
+      if(id){
+        this.service.ver(id).subscribe( alumno => this.alumno=alumno )
+      }
+    })
+
   }
 
 
@@ -29,6 +36,24 @@ export class AlumnosFormComponent implements OnInit {
     this.service.crear(this.alumno).subscribe(alumno =>{
       console.log(alumno);
       alert(`Alumno ${alumno.nombre} creado con éxito`);
+      this.router.navigate(['/alumnos']);
+
+
+    },err=>{
+      if(err.status === 400){
+        this.error= err.error;
+        console.log(this.error);
+      }
+    })
+  
+  }
+
+  public editar(): void{
+
+    this.service.editar(this.alumno).subscribe(alumno =>{
+      
+      console.log(alumno);
+      alert(`Alumno ${alumno.nombre} actualizado con éxito`);
       this.router.navigate(['/alumnos']);
 
 

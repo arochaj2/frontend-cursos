@@ -32,7 +32,7 @@ export class AlumnoService {
 
   public ver(id: number): Observable<Alumno>{
 
-    return this.http.get<Alumno>(`${ this.baseEndpoint } / ${ id }`);
+    return this.http.get<Alumno>(`${this.baseEndpoint}/${id}`);
   }
 
   public crear (alumno: Alumno):Observable<Alumno>{
@@ -41,7 +41,7 @@ export class AlumnoService {
 
   public editar (alumno: Alumno):Observable<Alumno>{
 
-    return this.http.put<Alumno>(`${ this.baseEndpoint } / ${ alumno.id }`,alumno,{headers: this.cabeceras})
+    return this.http.put<Alumno>(`${this.baseEndpoint}/${alumno.id}`,alumno,{ headers: this.cabeceras})
   }
 
   public eliminar(id: number): Observable<void>{
