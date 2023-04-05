@@ -14,6 +14,8 @@ export class AlumnosFormComponent implements OnInit {
 
   alumno: Alumno = new Alumno();
 
+  error: any;
+
 
   constructor(private service:AlumnoService, 
               private router: Router) { }
@@ -30,6 +32,11 @@ export class AlumnosFormComponent implements OnInit {
       this.router.navigate(['/alumnos']);
 
 
+    },err=>{
+      if(err.status === 400){
+        this.error= err.error;
+        console.log(this.error);
+      }
     })
   
   }
