@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { PageEvent } from '@angular/material/paginator';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatPaginator, PageEvent } from '@angular/material/paginator';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import Swal from 'sweetalert2';
@@ -18,6 +18,8 @@ export class AlumnosComponent implements OnInit {
   paginaActual = 0;
   totalPorPagina = 4;
   pageSizeOptions: number[]= [3, 5, 10, 25, 100];
+
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
 
   constructor(private service: AlumnoService) { }
@@ -39,14 +41,12 @@ export class AlumnosComponent implements OnInit {
 
 private calcularRangos(){
 
-  const paginaActual =this.paginaActual+'';
-  const totalPorPagina =this.totalPorPagina+'';
-
-  this.service.listarPaginas(paginaActual, totalPorPagina)
+  this.service.listarPaginas(this.paginaActual.toString(), this.totalPorPagina.toString())
   .subscribe(paginacion => 
     {
       this.alumnos = paginacion.content as Alumno[];
       this.totalRegistros =paginacion.totalElements as number;
+      this.paginator._intl.itemsPerPageLabel= 'Registros por página:'
 
     });
 

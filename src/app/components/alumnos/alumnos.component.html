@@ -38,7 +38,9 @@
               [pageIndex]="paginaActual"
               [pageSizeOptions]="pageSizeOptions"
               aria-label="Select page"
-              (page) = "paginar($event)">
+              (page) = "paginar($event)"
+              showFirstLastButtons
+              class="float-start mx-2">
         </mat-paginator>  
     </div>
     </div>
