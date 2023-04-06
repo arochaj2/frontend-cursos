@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PageEvent } from '@angular/material/paginator';
 import { Alumno } from 'src/app/models/alumno';
 import { AlumnoService } from 'src/app/services/alumno.service';
 import Swal from 'sweetalert2';
@@ -23,10 +24,33 @@ export class AlumnosComponent implements OnInit {
 
   ngOnInit(): void {
 
-    this.service.listar().subscribe(alumnos => this.alumnos = []);
+    this.calcularRangos();
+  }
 
+  paginar(event: PageEvent):void {
+    this.paginaActual = event.pageIndex;
+    this,this.totalPorPagina = event.pageSize; 
+    this.calcularRangos();
+
+    
 
   }
+
+
+private calcularRangos(){
+
+  const paginaActual =this.paginaActual+'';
+  const totalPorPagina =this.totalPorPagina+'';
+
+  this.service.listarPaginas(paginaActual, totalPorPagina)
+  .subscribe(paginacion => 
+    {
+      this.alumnos = paginacion.content as Alumno[];
+      this.totalRegistros =paginacion.totalElements as number;
+
+    });
+
+}
 
   public eliminar(alumno: Alumno): void {
 
@@ -43,7 +67,8 @@ export class AlumnosComponent implements OnInit {
       if (result.isConfirmed) {
 
           this.service.eliminar(alumno.id).subscribe(() => {
-          this.alumnos = this.alumnos.filter(a => a !== alumno);
+          //this.alumnos = this.alumnos.filter(a => a !== alumno);
+          this.calcularRangos();
           // alert(`alumno ${alumno.nombre} eliminado con éxito`)
           Swal.fire('Eliminado:', `Alumno ${alumno.nombre} eliminado con éxito`, 'success');
         })

@@ -37,7 +37,8 @@
               [pageSize]="totalPorPagina"
               [pageIndex]="paginaActual"
               [pageSizeOptions]="pageSizeOptions"
-              aria-label="Select page">
+              aria-label="Select page"
+              (page) = "paginar($event)">
         </mat-paginator>  
     </div>
     </div>
