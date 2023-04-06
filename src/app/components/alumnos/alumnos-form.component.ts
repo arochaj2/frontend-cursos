@@ -13,7 +13,7 @@ import { CommonFormComponent } from '../common-form.component';
 export class AlumnosFormComponent 
 extends CommonFormComponent<Alumno,AlumnoService> implements OnInit {
 
-  
+  private fotoSeleccionada: File;
 
   constructor( service:AlumnoService, 
                router: Router, 
@@ -27,5 +27,13 @@ extends CommonFormComponent<Alumno,AlumnoService> implements OnInit {
                 }
 
  
+
+                public seleccionarFoto(event): void {
+
+                  this.fotoSeleccionada = event.target.files[0];
+                  console.info(this.fotoSeleccionada);
+
+
+                }
 
 }
