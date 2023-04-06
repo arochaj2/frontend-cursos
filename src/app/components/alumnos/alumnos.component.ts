@@ -13,6 +13,12 @@ export class AlumnosComponent implements OnInit {
   titulo = 'Listado de Alumnos';
   alumnos: Alumno[];
 
+  totalRegistros = 0;
+  paginaActual = 0;
+  totalPorPagina = 4;
+  pageSizeOptions: number[]= [3, 5, 10, 25, 100];
+
+
   constructor(private service: AlumnoService) { }
 
   ngOnInit(): void {

@@ -33,6 +33,12 @@
                 </tr>
             </tbody>
         </table>
+        <mat-paginator [length]="totalRegistros"
+              [pageSize]="totalPorPagina"
+              [pageIndex]="paginaActual"
+              [pageSizeOptions]="pageSizeOptions"
+              aria-label="Select page">
+        </mat-paginator>  
     </div>
     </div>
 
