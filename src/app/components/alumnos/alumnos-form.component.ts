@@ -36,4 +36,51 @@ extends CommonFormComponent<Alumno,AlumnoService> implements OnInit {
 
                 }
 
+                public override crear(): void{
+
+                  if(!this.fotoSeleccionada){
+                    super.crear();
+                  }else{
+
+                    this.service.crearConFoto(this.model,this.fotoSeleccionada)
+                    .subscribe(alumno =>{
+                      console.log(alumno);
+                    //  alert(`Alumno ${alumno.nombre} creado con éxito`);
+                      Swal.fire('Nuevo:',`Alumno ${alumno.nombre} creado con éxito`,'success');
+                      this.router.navigate([this.redirect]);
+                
+                
+                    },err=>{
+                      if(err.status === 400){
+                        this.error= err.error;
+                        console.log(this.error);
+                      }
+                    });
+
+                  }
+                }
+
+                public override editar(): void{
+
+                  if(!this.fotoSeleccionada){
+                    super.editar();
+                  }else{
+
+                    this.service.editarConFoto(this.model,this.fotoSeleccionada)
+                    .subscribe(alumno =>{
+                      console.log(alumno);
+                      Swal.fire('Modificado:',`Alumno ${alumno.nombre} modificado con éxito`,'success');
+                      this.router.navigate([this.redirect]);
+                
+                
+                    },err=>{
+                      if(err.status === 400){
+                        this.error= err.error;
+                        console.log(this.error);
+                      }
+                    });
+
+                  }
+                }
+
 }

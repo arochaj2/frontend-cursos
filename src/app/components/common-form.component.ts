@@ -45,7 +45,7 @@ export abstract class CommonFormComponent<E extends Generic,S extends CommonServ
         this.error= err.error;
         console.log(this.error);
       }
-    })
+    });
   
   }
 
