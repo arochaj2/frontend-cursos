@@ -33,6 +33,13 @@ extends CommonFormComponent<Alumno,AlumnoService> implements OnInit {
                   this.fotoSeleccionada = event.target.files[0];
                   console.info(this.fotoSeleccionada);
 
+                  if(this.fotoSeleccionada.type.indexOf('image')<0){
+                    this.fotoSeleccionada=null;
+                    Swal.fire('Error', 
+                    'El archivo debe ser détipo imagen',
+                    'error');
+                  }
+
 
                 }
 

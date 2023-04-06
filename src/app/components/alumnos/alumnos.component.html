@@ -21,12 +21,19 @@
             <tbody>
                 <tr *ngFor="let alumno of lista">
                     <td>{{alumno.id}}</td>
-                    <td>
-                        
+                    <td>                     
                         <img *ngIf="alumno.fotoHashCode"
-                         [src]="'http://localhost:8090/api/alumnos/uploads/img/' + alumno.id + '?fotoHashCode='+alumno.fotoHashCode"
+                        [src]="baseEndpoint+'/uploads/img/'+alumno.id+'?fotoHashCode='+alumno.fotoHashCode"
                         class="img-thumbnail rounded"
-                        style="width: 64px; cursor: pointer">
+                        style="width: 50px; cursor: pointer">
+
+                        <img *ngIf="!alumno.fotoHashCode"
+                        [src]="'/assets/images/no-usuario.png'"
+                        class="img-thumbnail rounded"
+                        style="width: 50px; cursor: pointer">
+
+
+
                     </td>
                     <td>{{alumno.nombre}}</td>
                     <td>{{alumno.apellido}}</td>
